@@ -3,6 +3,9 @@ from fastapi.responses import JSONResponse
 from api.routers import health, runs, jira, slack
 
 app = FastAPI(title='PM CoachBot Agent (MVP)')
+@app.get("/")
+async def root():
+    return {"ok": True, "message": "PM CoachBot Agent is running. Try /healthz or POST /runs/plan"}
 
 app.include_router(health.router)
 app.include_router(runs.router, prefix='/runs', tags=['runs'])
