@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+# This function is mounted at /api/index
 app = FastAPI(title="PM CoachBot")
 
 @app.get("/")
