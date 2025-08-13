@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="PM CoachBot (Modern Vercel Config)")
+app = FastAPI(title="PM CoachBot")
 
 @app.get("/")
 async def root():
