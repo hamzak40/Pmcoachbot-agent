@@ -5,7 +5,6 @@ app = FastAPI()
 async def healthz():
     return {"ok": True, "service": "pm-coachbot", "status": "healthy"}
 
-
 app = FastAPI(title='PM CoachBot (Modern Vercel Config)')
 
 @app.get('/')
