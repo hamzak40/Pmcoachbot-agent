@@ -1,21 +1,16 @@
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/healthz")
-async def healthz():
-    return {"ok": True, "service": "pm-coachbot-agent", "status": "healthy"}
-
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from api.routers import health, runs, jira, slack
+from api.routers import health, runs, jira, slack, gumroad, access
 
-app = FastAPI(title='PM CoachBot Agent (MVP)')
-@app.get("/")
+app = FastAPI(title='PM CoachBot Subscription Agent (MVP)')
+
+@app.get('/')
 async def root():
-    return {"ok": True, "message": "PM CoachBot Agent is running. Try /healthz or POST /runs/plan"}
+    return {'ok': True, 'message': 'PM CoachBot Agent running. Try /healthz or POST /runs/plan'}
 
 app.include_router(health.router)
+app.include_router(access.router, prefix='/access', tags=['access'])
+app.include_router(gumroad.router, prefix='/gumroad', tags=['gumroad'])
 app.include_router(runs.router, prefix='/runs', tags=['runs'])
 app.include_router(jira.router, prefix='/jira', tags=['jira'])
 app.include_router(slack.router, prefix='/slack', tags=['slack'])
