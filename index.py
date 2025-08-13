@@ -1,3 +1,11 @@
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/healthz")
+async def healthz():
+    return {"ok": True, "service": "pm-coachbot-agent", "status": "healthy"}
+
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from api.routers import health, runs, jira, slack
